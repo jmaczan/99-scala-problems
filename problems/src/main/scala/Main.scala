@@ -16,6 +16,10 @@
   println("\nP04")
   println(p04(p01_list))
   println(p04_1(p01_list))
+
+  println("\nP05")
+  println(p05(p01_list))
+  println(p05_1(p01_list))
 }
 
 /*
@@ -81,4 +85,17 @@ def p04_1[T](list: List[T]): Int = p04_internal(0, list)
 def p04_internal[T](listLength: Int, list: List[T]): Int = list.headOption match {
   case None => listLength
   case _ => p04_internal(listLength + 1, list.tail)
+}
+
+/*
+P05 (*) Reverse a list.
+    Example:
+
+    scala> reverse(List(1, 1, 2, 3, 5, 8))
+    res0: List[Int] = List(8, 5, 3, 2, 1, 1)
+*/
+def p05[T](list: List[T]): List[T] = list.reverse
+
+def p05_1[T](list: List[T]): List[T] = list.foldLeft(List()) {
+  (reversedList: List[T], element: T) => element :: reversedList
 }
