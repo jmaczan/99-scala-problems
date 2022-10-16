@@ -20,6 +20,14 @@
   println("\nP05")
   println(p05(p01_list))
   println(p05_1(p01_list))
+
+  println("\nP06")
+  val palindrome = List(1, 2, 3, 2, 1)
+  val notAPalindrome = List(1, 2, 3, 2, 1, 1)
+  val notAPalindromeAsWell = List(1, 2, 3, 2, 1, 1, 2)
+  println(p06(palindrome))
+  println(p06(notAPalindrome))
+  println(p06(notAPalindromeAsWell))
 }
 
 /*
@@ -98,4 +106,21 @@ def p05[T](list: List[T]): List[T] = list.reverse
 
 def p05_1[T](list: List[T]): List[T] = list.foldLeft(List()) {
   (reversedList: List[T], element: T) => element :: reversedList
+}
+
+/*
+P06 (*) Find out whether a list is a palindrome.
+    Example:
+
+    scala> isPalindrome(List(1, 2, 3, 2, 1))
+    res0: Boolean = true
+*/
+def p06[T](list: List[T]): Boolean = list.length % 2 != 0 && p06_internal(true, list)
+
+def p06_internal[T](isPalindrome: Boolean, list: List[T]): Boolean = list.length match {
+  case 0 | 1 => isPalindrome
+  case _ => list(0) == list(list.length - 1) match {
+    case true => p06_internal(isPalindrome && true, list.slice(1, list.length - 1))
+    case false => p06_internal(false, List())
+  }
 }
