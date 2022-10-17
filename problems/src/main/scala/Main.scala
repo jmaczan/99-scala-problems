@@ -28,6 +28,10 @@
   println(p06(palindrome))
   println(p06(notAPalindrome))
   println(p06(notAPalindromeAsWell))
+
+  println("\nP07")
+  val nestedList = List(List(1, 1), 2, List(3, List(5, 8)))
+  println(p07(nestedList))
 }
 
 /*
@@ -122,5 +126,19 @@ def p06_internal[T](isPalindrome: Boolean, list: List[T]): Boolean = list.length
   case _ => list(0) == list(list.length - 1) match {
     case true => p06_internal(isPalindrome && true, list.slice(1, list.length - 1))
     case false => p06_internal(false, List())
+  }
+}
+
+/*
+P07 (**) Flatten a nested list structure.
+    Example:
+
+    scala> flatten(List(List(1, 1), 2, List(3, List(5, 8))))
+    res0: List[Any] = List(1, 1, 2, 3, 5, 8)
+*/
+def p07[T](list: List[T | List[T]]): List[T] = list.foldLeft(List()) {
+  (flattenedList: List[T], element: T | List[T]) => element.isInstanceOf[List[T]] match {
+    case true => flattenedList ::: p07(element.asInstanceOf[List[T]])
+    case false => flattenedList :+ element.asInstanceOf[T]
   }
 }
