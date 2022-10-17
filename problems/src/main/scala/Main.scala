@@ -32,6 +32,10 @@
   println("\nP07")
   val nestedList = List(List(1, 1), 2, List(3, List(5, 8)))
   println(p07(nestedList))
+
+  println("\nP08")
+  val uncompressedList = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+  println(p08(uncompressedList))
 }
 
 /*
@@ -140,5 +144,21 @@ def p07[T](list: List[T | List[T]]): List[T] = list.foldLeft(List()) {
   (flattenedList: List[T], element: T | List[T]) => element.isInstanceOf[List[T]] match {
     case true => flattenedList ::: p07(element.asInstanceOf[List[T]])
     case false => flattenedList :+ element.asInstanceOf[T]
+  }
+}
+
+/*
+P08 (**) Eliminate consecutive duplicates of list elements.
+    If a list contains repeated elements they should be replaced with a single copy of the element. The order of the elements should not be changed.
+
+    Example:
+
+    scala> compress(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
+    res0: List[Symbol] = List('a, 'b, 'c, 'a, 'd, 'e)
+*/
+def p08[T](list: List[T]): List[T] = list.foldLeft(List()) {
+  (compressedList: List[T], element: T) => compressedList.length > 0 && compressedList.last == element match {
+    case true => compressedList
+    case false => compressedList :+ element
   }
 }
