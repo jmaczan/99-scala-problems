@@ -40,4 +40,8 @@
   println("\nP09")
   val unpackedList = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
   println(p09(unpackedList))
+
+  println("\nP10")
+  val unencodedList = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+  println(p10(unencodedList))
 }
