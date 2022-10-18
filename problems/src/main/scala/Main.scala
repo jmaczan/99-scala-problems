@@ -36,4 +36,8 @@
   println("\nP08")
   val uncompressedList = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
   println(p08(uncompressedList))
+
+  println("\nP09")
+  val unpackedList = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+  println(p09(unpackedList))
 }

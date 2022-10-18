@@ -121,3 +121,19 @@ def p08[T](list: List[T]): List[T] = list.foldLeft(List()) {
     case false => compressedList :+ element
   }
 }
+
+/*
+P09 (**) Pack consecutive duplicates of list elements into sublists.
+    If a list contains repeated elements they should be placed in separate sublists.
+
+    Example:
+
+    scala> pack(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
+    res0: List[List[Symbol]] = List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))
+*/
+def p09[T](list: List[T]): List[List[T]] = list.foldLeft(List()) {
+  (packedLists: List[List[T]], element: T) => packedLists.length > 0 && packedLists.last.last == element match {
+    case true => ((packedLists.last :+ element) :: packedLists.slice(0, packedLists.length - 1).reverse).reverse
+    case false => (List(element) :: packedLists.reverse).reverse
+  }
+}
