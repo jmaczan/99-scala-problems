@@ -153,3 +153,27 @@ def p10[T](list: List[T]): List[(Int, T)] = list.foldLeft(List()) {
     case false => ((1, element) :: encodedList.reverse).reverse
   }
 }
+
+/*
+P11 (*) Modified run-length encoding.
+    Modify the result of problem P10 in such a way that if an element has no duplicates it is simply copied into the result list. Only elements with duplicates are transferred as (N, E) terms.
+
+    Example:
+
+    scala> encodeModified(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
+    res0: List[Any] = List((4,'a), 'b, (2,'c), (2,'a), 'd, (4,'e))
+*/
+def p11[T](list: List[T]): List[(Int, T) | T] = list.foldLeft(List()) {
+  (encodedList: List[(Int, T) | T], element: T) => encodedList.length > 0 && 
+    encodedList.last.isInstanceOf[(Int, T)] &&
+    encodedList.last.asInstanceOf[(Int, T)]._2 == element match {
+      case true => ((encodedList.last.asInstanceOf[(Int, T)]._1 + 1, element) :: encodedList.slice(0, encodedList.length - 1).reverse).reverse
+      case false => encodedList.length > 0 match {
+        case true => encodedList.last == element match {
+          case true => ((2, element) :: encodedList.slice(0, encodedList.length - 1).reverse).reverse
+          case false => (element :: encodedList.reverse).reverse
+        }
+        case false => (element :: encodedList.reverse).reverse
+      }
+  }
+}

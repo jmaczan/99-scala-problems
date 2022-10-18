@@ -44,4 +44,8 @@
   println("\nP10")
   val unencodedList = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
   println(p10(unencodedList))
+
+  println("\nP11")
+  val unencodedModifiedList = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+  println(p11(unencodedModifiedList))
 }
